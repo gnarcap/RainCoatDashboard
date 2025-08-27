@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Raincoat Dashboard{% endblock %}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Raincoat Business Dashboard</h1>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

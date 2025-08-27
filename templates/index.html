@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form id="orderForm">
+    <input type="text" id="customer" placeholder="Customer Name" required>
+    <input type="number" id="quantity" placeholder="Quantity" required>
+    <input type="number" id="price" placeholder="Price" step="0.01" required>
+    <button type="submit">Add Order</button>
+</form>
+
+<div>
+    <canvas id="chart" width="400" height="200"></canvas>
+</div>
+
+<div class="stats">
+    <p>Database Orders: {{ orders }}</p>
+    <p>Total Revenue: ${{ "%.2f"|format(revenue) }}</p>
+</div>
+
+<button onclick="transferData()">Transfer to SFTP</button>
+<p><a href="/metrics">Metrics</a></p>
+{% endblock %}
