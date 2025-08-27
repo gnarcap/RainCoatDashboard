@@ -58,7 +58,7 @@ def dashboard():
         raincoat_orders.inc(1)
     raincoat_inventory.set(random.randint(50, 200))
     
-    return render_template_string('''<!DOCTYPE html>
+    template = '''<!DOCTYPE html>
 <html>
 <head>
     <title>Raincoat Dashboard</title>
@@ -93,7 +93,7 @@ def dashboard():
             data: {
                 labels: ['Sales', 'Orders', 'Inventory'],
                 datasets: [{
-                    data: [{{ sales }}, {{ orders }}, {{ inventory }}],
+                    data: [{{ sales }}, {{ orders_count }}, {{ inventory }}],
                     backgroundColor: ['#36A2EB', '#FF6384', '#4BC0C0']
                 }]
             }
@@ -119,7 +119,14 @@ def dashboard():
         }
     </script>
 </body>
-</html>''', sales=int(raincoat_sales._value._value), inventory=int(raincoat_inventory._value), orders=int(raincoat_orders._value._value), orders=orders, revenue=total_revenue)
+</html>'''
+    
+    return render_template_string(template, 
+                                sales=int(raincoat_sales._value.get()), 
+                                inventory=int(raincoat_inventory._value.get()), 
+                                orders_count=int(raincoat_orders._value.get()), 
+                                orders=orders, 
+                                revenue=total_revenue)
 
 @app.route('/order', methods=['POST'])
 def add_order():
